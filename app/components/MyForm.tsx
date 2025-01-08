@@ -33,7 +33,7 @@ export default function MyForm({ show, setShow }: MyFormProps) {
       Number(score) > 15 ||
       Number(score) < 0
     ) {
-      toast.error("Score should be a number");
+      toast.error("Score should be a number between [0-15]");
       isValid = false;
     }
 
