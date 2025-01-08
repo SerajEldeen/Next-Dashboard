@@ -8,7 +8,6 @@ Chart.register(PieController, ArcElement, Tooltip, Legend);
 
 export default function QuestionAnalysis() {
   const { score } = useMyContext();
-  const scoreNumber = Number(score);
   const chartRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -22,7 +21,7 @@ export default function QuestionAnalysis() {
             labels: ["Gained", "Remaining"],
             datasets: [
               {
-                data: [scoreNumber, 15 - scoreNumber],
+                data: [ Number(score), 15 -  Number(score)],
                 backgroundColor: ["#2553cf", "#e0e0e0"],
                 borderWidth: 0,
               },
@@ -47,7 +46,7 @@ export default function QuestionAnalysis() {
         return () => myChart.destroy();
       }
     }
-  }, []);
+  }, [score]);
 
   return (
     <div className="border-solid border-2 border-gray-200 rounded-md px-3 py-5 w-full  max-w-[90%] ">
