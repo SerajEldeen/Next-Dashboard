@@ -55,7 +55,7 @@ export default function MyForm({ show, setShow }: MyFormProps) {
     setPercentile(localPercentile);
     setScore(localScore);
     setShow(!show);
-    toast.success("Scores updated successfully!");
+    toast.success("Statistics updated successfully!");
   };
 
   return (
@@ -68,8 +68,9 @@ export default function MyForm({ show, setShow }: MyFormProps) {
           <h3 className="font-bold">Update Scores</h3>
           <Image src="/html.png" alt="Form-img" width={40} height={40} />
         </div>
-        <ol className="list-decimal">
-          <li className="flex justify-between mb-3">
+        <ol className="list-decimal list-inside pl-5 ">
+          <li className="flex justify-between mb-3 relative ">
+            <span className="absolute -left-8 before:content-['1'] before:mr-2 before:ml-2  rounded-xl bg-blue-950 text-white  "></span>
             <label htmlFor="rankInput">
               Update your <span className="font-bold">Rank</span>
             </label>
@@ -91,7 +92,8 @@ export default function MyForm({ show, setShow }: MyFormProps) {
               )}
             </div>
           </li>
-          <li className="flex justify-between mb-3">
+          <li className="flex justify-between mb-3 relative">
+            <span className="absolute -left-8 before:content-['2'] before:mr-2 before:ml-2  rounded-xl bg-blue-950 text-white  "></span>
             <label htmlFor="percentileInput">
               Update your <span className="font-bold">Percentile</span>
             </label>
@@ -113,7 +115,8 @@ export default function MyForm({ show, setShow }: MyFormProps) {
               )}
             </div>
           </li>
-          <li className="flex justify-between mb-3">
+          <li className="flex justify-between mb-3 relative">
+            <span className="absolute -left-8 before:content-['3'] before:mr-2 before:ml-2  rounded-xl bg-blue-950 text-white  "></span>
             <label htmlFor="scoreInput">
               Update your{" "}
               <span className="font-bold">Current Score (out of 15)</span>
