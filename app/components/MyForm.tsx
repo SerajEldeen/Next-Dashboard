@@ -2,36 +2,43 @@ import Image from "next/image";
 import { useMyContext } from "../context/MyContextProvider";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useState } from "react";
 
 interface MyFormProps {
   show: boolean;
   setShow: (show: boolean) => void;
 }
+
 export default function MyForm({ show, setShow }: MyFormProps) {
   const { rank, setRank, percentile, setPercentile, score, setScore } =
     useMyContext();
+
+  const [localRank, setLocalRank] = useState(rank);
+  const [localPercentile, setLocalPercentile] = useState(percentile);
+  const [localScore, setLocalScore] = useState(score);
+
   const validateForm = (): boolean => {
     let isValid = true;
-    if (!rank || isNaN(Number(rank))) {
-      toast.error("Rank  should be a number");
+    if (!localRank || isNaN(Number(localRank))) {
+      toast.error("Rank should be a number");
       isValid = false;
     }
 
     if (
-      !percentile ||
-      isNaN(Number(percentile)) ||
-      Number(percentile) < 0 ||
-      Number(percentile) > 100
+      !localPercentile ||
+      isNaN(Number(localPercentile)) ||
+      Number(localPercentile) < 0 ||
+      Number(localPercentile) > 100
     ) {
       toast.error("Percentile must be between 0 and 100");
       isValid = false;
     }
 
     if (
-      !score ||
-      isNaN(Number(score)) ||
-      Number(score) > 15 ||
-      Number(score) < 0
+      !localScore ||
+      isNaN(Number(localScore)) ||
+      Number(localScore) > 15 ||
+      Number(localScore) < 0
     ) {
       toast.error("Score should be a number between [0-15]");
       isValid = false;
@@ -43,9 +50,10 @@ export default function MyForm({ show, setShow }: MyFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
-    setRank(rank);
-    setPercentile(percentile);
-    setScore(score);
+
+    setRank(localRank);
+    setPercentile(localPercentile);
+    setScore(localScore);
     setShow(!show);
     toast.success("Scores updated successfully!");
   };
@@ -68,15 +76,15 @@ export default function MyForm({ show, setShow }: MyFormProps) {
             <div>
               <input
                 type="text"
-                value={rank}
-                onChange={(e) => setRank(e.target.value)}
+                value={localRank}
+                onChange={(e) => setLocalRank(e.target.value)}
                 id="rankInput"
                 className={`outline-1 border-solid border-2 px-1 py-1 focus:outline-blue-300 rounded-md ${
-                  rank === "" ? "border-red-500" : "border-blue-300"
+                  localRank === "" ? "border-red-500" : "border-blue-300"
                 }`}
                 placeholder="Rank"
               />
-              {rank === "" && (
+              {localRank === "" && (
                 <p className="text-red-500 text-sm">
                   required | should be number
                 </p>
@@ -90,17 +98,17 @@ export default function MyForm({ show, setShow }: MyFormProps) {
             <div>
               <input
                 type="text"
-                value={percentile}
-                onChange={(e) => setPercentile(e.target.value)}
+                value={localPercentile}
+                onChange={(e) => setLocalPercentile(e.target.value)}
                 id="percentileInput"
                 className={`outline-1 border-solid border-2 px-1 py-1 focus:outline-blue-300 rounded-md ${
-                  percentile === "" ? "border-red-500" : "border-blue-300"
+                  localPercentile === "" ? "border-red-500" : "border-blue-300"
                 }`}
                 placeholder="Percentile"
               />
-              {percentile === "" && (
+              {localPercentile === "" && (
                 <p className="text-red-500 text-sm">
-                  required | precentile 0-100
+                  required | percentile 0-100
                 </p>
               )}
             </div>
@@ -113,15 +121,15 @@ export default function MyForm({ show, setShow }: MyFormProps) {
             <div>
               <input
                 type="text"
-                value={score}
-                onChange={(e) => setScore(e.target.value)}
+                value={localScore}
+                onChange={(e) => setLocalScore(e.target.value)}
                 id="scoreInput"
                 className={`outline-1 border-solid border-2 px-1 py-1 focus:outline-blue-300 rounded-md ${
-                  score === "" ? "border-red-500" : "border-blue-300"
+                  localScore === "" ? "border-red-500" : "border-blue-300"
                 }`}
                 placeholder="Score"
               />
-              {score === "" && (
+              {localScore === "" && (
                 <p className="text-red-500 text-sm">
                   required | should be score
                 </p>
