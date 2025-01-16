@@ -19,8 +19,8 @@ export default function MyForm({ show, setShow }: MyFormProps) {
 
   const validateForm = (): boolean => {
     let isValid = true;
-    if (!localRank || isNaN(Number(localRank))) {
-      toast.error("Rank should be a number");
+    if (!localRank || isNaN(Number(localRank)) || Number(localRank) <= 0) {
+      toast.error("Rank should be a positive  number ");
       isValid = false;
     }
 

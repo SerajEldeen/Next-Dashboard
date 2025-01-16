@@ -21,7 +21,7 @@ export default function QuestionAnalysis() {
             labels: ["Gained", "Remaining"],
             datasets: [
               {
-                data: [ Number(score), 15 -  Number(score)],
+                data: [Number(score), 15 - Number(score)],
                 backgroundColor: ["#2553cf", "#e0e0e0"],
                 borderWidth: 0,
               },
